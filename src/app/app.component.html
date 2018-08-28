@@ -1,3 +1,2 @@
 <h1>{{ title }}</h1>
-<app-photo [src]="'https://i.pinimg.com/originals/93/74/b0/9374b044c9b627c427f3f6ce2f139e96.jpg'" [description]="'Lion'"></app-photo>
-<app-photo [src]="'http://www.portaldosanimais.com.br/blog/wp-content/gallery/fotos-de-girafa/Fotos-de-Girafa-4.jpg'" [description]="'Giraffe'"></app-photo>
+<app-photo *ngFor="let photo of photos" [src]="photo.url" [description]="photo.description"></app-photo>
