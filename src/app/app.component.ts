@@ -1,17 +1,26 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {PhotoService} from './photos/photo/photo.service';
+import {Photo} from './photos/photo/photo';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
-  title = 'AngularPic';
-  photos = [{
-      url: 'https://i.pinimg.com/originals/93/74/b0/9374b044c9b627c427f3f6ce2f139e96.jpg',
-      description: 'Lion'
-    }, {
-      url: 'http://www.portaldosanimais.com.br/blog/wp-content/gallery/fotos-de-girafa/Fotos-de-Girafa-4.jpg',
-      description: 'Giraffe'
-    }];
+export class AppComponent implements OnInit {
+    public title = 'AngularPic';
+    public photos: Photo[] = [];
+
+    public constructor(private photoService: PhotoService) {}
+
+    ngOnInit(): void {
+      this.listPhotosFromUser('flavio');
+    }
+
+    private listPhotosFromUser(username: string) {
+        this
+            .photoService
+            .listFromUser(username)
+            .subscribe(response => this.photos = response);
+    }
 }
