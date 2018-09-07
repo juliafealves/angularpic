@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
 import { Photo } from '../photo/photo';
-import { PhotoService } from '../photo/photo.service';
 
 @Component({
     selector: 'ap-photo-list',
@@ -14,23 +13,10 @@ export class PhotoListComponent implements OnInit {
     public photos: Photo[] = [];
     public filter = '';
 
-    public constructor(private photoService: PhotoService,
-                       private activatedRoute: ActivatedRoute) {
+    public constructor(private activatedRoute: ActivatedRoute) {
     }
 
     ngOnInit(): void {
-        const username = this.activatedRoute.snapshot.params.username;
-        this.listPhotosFromUser(username);
-    }
-
-    /**
-     * List all photos by user.
-     * @param username
-     */
-    private listPhotosFromUser(username: string) {
-        this
-            .photoService
-            .listFromUser(username)
-            .subscribe(response => this.photos = response);
+        this.photos = this.activatedRoute.snapshot.data.photos;
     }
 }
