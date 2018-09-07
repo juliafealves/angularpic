@@ -14,6 +14,6 @@ export class PhotoListResolve implements Resolve<Observable<Photo[]>> {
 
     public resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<Photo[]> {
         const username = route.params.username;
-        return this.photoService.listFromUser(username);
+        return this.photoService.listFromUserPaginated(username, 1);
     }
 }

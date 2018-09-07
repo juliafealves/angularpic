@@ -1,9 +1,10 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-
-import { Photo } from '../photo/photo';
 import { Subject } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
+
+import { Photo } from '../photo/photo';
+import { PhotoService } from '../photo/photo.service';
 
 @Component({
     selector: 'ap-photo-list',
@@ -14,12 +15,17 @@ export class PhotoListComponent implements OnInit, OnDestroy {
 
     public debounce: Subject<string> = new Subject<string>();
     public filter = '';
+    public hasMore = true;
+    public currentPage = 1;
+    public username = '';
     public photos: Photo[] = [];
 
-    public constructor(private activatedRoute: ActivatedRoute) {
+    public constructor(private activatedRoute: ActivatedRoute,
+                       private photoService: PhotoService) {
     }
 
-    ngOnInit(): void {
+    public ngOnInit(): void {
+        this.username = this.activatedRoute.snapshot.params.username;
         this.photos = this.activatedRoute.snapshot.data.photos;
         this
             .debounce
@@ -27,7 +33,22 @@ export class PhotoListComponent implements OnInit, OnDestroy {
             .subscribe(filter => this.filter = filter);
     }
 
-    ngOnDestroy(): void {
+    public ngOnDestroy(): void {
         this.debounce.unsubscribe();
+    }
+
+    /**
+     * Load more photos with pagination.
+     */
+    public loadPhotos(): void {
+        this.photoService
+            .listFromUserPaginated(this.username, ++this.currentPage)
+            .subscribe(photos => {
+                this.photos = this.photos.concat(photos);
+
+                if (!photos.length) {
+                    this.hasMore = false;
+                }
+            });
     }
 }
