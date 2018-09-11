@@ -8,12 +8,14 @@ import { LoadButtonComponent } from './load-button/load-button.component';
 import { PhotoModule } from '../photo/photo.module';
 import { CardModule } from '../../shared/components/card/card.module';
 import { SearchComponent } from './search/search.component';
+import { DarkenHoverModule } from '../../shared/directives/darken-hover/darken-hover.module';
 
 @NgModule({
     imports: [
         CommonModule,
         PhotoModule,
-        CardModule
+        CardModule,
+        DarkenHoverModule
     ],
     declarations: [
         PhotoListComponent,
