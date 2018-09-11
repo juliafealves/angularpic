@@ -4,14 +4,18 @@
     <div class="form-group">
         <input class="form-control" placeholder="User name" autofocus
                formControlName="username">
-        <small class="text-danger d-block mt-2"
-               *ngIf="loginForm.get('username').errors?.required">User name is required!</small>
+        <ap-input-message
+            message="User name is required!"
+            *ngIf="loginForm.get('username').errors?.required"
+        ></ap-input-message>
     </div>
     <div class="form-group">
         <input type="password" class="form-control" placeholder="Password"
                formControlName="password">
-        <small class="text-danger d-block mt-2"
-               *ngIf="loginForm.get('password').errors?.required">Password is required!</small>
+        <ap-input-message
+            message="Password is required!"
+            *ngIf="loginForm.get('password').errors?.required"
+        ></ap-input-message>
     </div>
     <button type="submit" class="btn btn-primary btn-block"
             [disabled]="loginForm.invalid">Login</button>
