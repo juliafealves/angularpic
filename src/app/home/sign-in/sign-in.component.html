@@ -1,0 +1,21 @@
+<h4 class="text-center">Login</h4>
+<form class="form mt-4"
+      [formGroup]="loginForm">
+    <div class="form-group">
+        <input class="form-control" placeholder="User name" autofocus
+               formControlName="username">
+        <small class="text-danger d-block mt-2"
+               *ngIf="loginForm.get('username').errors?.required">User name is required!</small>
+    </div>
+    <div class="form-group">
+        <input type="password" class="form-control" placeholder="Password"
+               formControlName="password">
+        <small class="text-danger d-block mt-2"
+               *ngIf="loginForm.get('password').errors?.required">Password is required!</small>
+    </div>
+    <button type="submit" class="btn btn-primary btn-block"
+            [disabled]="loginForm.invalid">Login</button>
+</form>
+<p>
+    Not a user? <a>Register now</a>
+</p>
