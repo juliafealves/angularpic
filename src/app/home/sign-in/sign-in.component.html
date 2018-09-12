@@ -1,9 +1,11 @@
 <h4 class="text-center">Login</h4>
 <form class="form mt-4"
-      [formGroup]="loginForm">
+      [formGroup]="loginForm"
+      (submit)="login()">
     <div class="form-group">
         <input class="form-control" placeholder="User name" autofocus
-               formControlName="username">
+               formControlName="username"
+               #usernameInput>
         <ap-input-message
             message="User name is required!"
             *ngIf="loginForm.get('username').errors?.required"
