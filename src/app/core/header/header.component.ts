@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
+import { User } from '../user/user';
+import { UserService } from '../user/user.service';
 
 @Component({
     selector: 'ap-header',
@@ -7,7 +10,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HeaderComponent implements OnInit {
 
-    constructor() {
+    public user: User;
+    private user$: Observable<User>;
+
+    constructor(private userService: UserService) {
+        this.user$ = this.userService.getUser();
+        this.user$.subscribe(user => this.user = user);
     }
 
     ngOnInit() {
