@@ -10,12 +10,10 @@ import { UserService } from '../user/user.service';
 })
 export class HeaderComponent implements OnInit {
 
-    public user: User;
-    private user$: Observable<User>;
+    public user$: Observable<User>;
 
     constructor(private userService: UserService) {
         this.user$ = this.userService.getUser();
-        this.user$.subscribe(user => this.user = user);
     }
 
     ngOnInit() {

@@ -4,9 +4,14 @@
             <img
                 src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/cf/Angular_full_color_logo.svg/250px-Angular_full_color_logo.svg.png"
                 width="30"/> AngularPic</a>
-        <div>
+        <div *ngIf="(user$ | async) as user; else login">
             <i class="fa fa-user-circle"></i>
             <a class="ml-2">{{ user?.name }}</a>
         </div>
+        <ng-template #login>
+            <span class="navbar-text">
+                <a>Please, login!</a>
+            </span>
+        </ng-template>
     </nav>
 </header>
