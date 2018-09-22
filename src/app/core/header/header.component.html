@@ -5,8 +5,9 @@
                 src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/cf/Angular_full_color_logo.svg/250px-Angular_full_color_logo.svg.png"
                 width="30"/> AngularPic</a>
         <div *ngIf="(user$ | async) as user; else login">
-            <i class="fa fa-user-circle"></i>
-            <a class="ml-2">{{ user?.name }}</a>
+            <i class="fa fa-user-circle mr-1"></i>
+            <a class="mr-1">{{ user?.name }}</a>
+            <a role="button" (click)="logout()">(Logout)</a>
         </div>
         <ng-template #login>
             <span class="navbar-text">
